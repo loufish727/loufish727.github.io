@@ -1,0 +1,19 @@
+{
+  "name": "SimpleCart",
+  "short_name": "SimpleCart",
+  "description": "A fast, offline-ready grocery list app.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f2",
+  "theme_color": "#2f7d57",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%232f7d57'/%3E%3Cpath d='M144 178h270l-34 156H180z' fill='%23fff' opacity='.95'/%3E%3Cpath d='M121 130h54l19 64' fill='none' stroke='%23fff' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='207' cy='385' r='28' fill='%23fff'/%3E%3Ccircle cx='343' cy='385' r='28' fill='%23fff'/%3E%3Ctext x='256' y='286' text-anchor='middle' font-family='Arial,sans-serif' font-size='96' font-weight='800' fill='%232f7d57'%3ESC%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#2f7d57">
+    <meta name="description" content="SimpleCart is a fast, offline-ready grocery list app.">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <title>SimpleCart</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="brand-mark" aria-hidden="true">SC</div>
+        <div>
+          <h1>SimpleCart</h1>
+          <p>Fast grocery lists for the aisle.</p>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel add-panel" aria-labelledby="add-item-title">
+          <h2 id="add-item-title">Add groceries</h2>
+          <form id="item-form" class="item-form" autocomplete="off">
+            <label class="field field-name">
+              <span>Item name</span>
+              <input id="item-name" name="name" type="text" placeholder="e.g. Tomatoes" required maxlength="80">
+            </label>
+
+            <label class="field field-quantity">
+              <span>Quantity</span>
+              <input id="item-quantity" name="quantity" type="text" placeholder="2 lb" maxlength="30">
+            </label>
+
+            <label class="field field-category">
+              <span>Category</span>
+              <select id="item-category" name="category"></select>
+            </label>
+
+            <button class="primary-button" type="submit">Add</button>
+          </form>
+
+          <div class="quick-add" aria-label="Quick add common items">
+            <button type="button" data-quick="Milk" data-category="Dairy">Milk</button>
+            <button type="button" data-quick="Eggs" data-category="Dairy">Eggs</button>
+            <button type="button" data-quick="Bread" data-category="Pantry">Bread</button>
+            <button type="button" data-quick="Chicken" data-category="Meat">Chicken</button>
+            <button type="button" data-quick="Apples" data-category="Produce">Apples</button>
+            <button type="button" data-quick="Bananas" data-category="Produce">Bananas</button>
+            <button type="button" data-quick="Rice" data-category="Pantry">Rice</button>
+            <button type="button" data-quick="Coffee" data-category="Drinks">Coffee</button>
+          </div>
+        </section>
+
+        <section class="panel controls-panel" aria-label="List controls">
+          <label class="field search-field">
+            <span>Search</span>
+            <input id="search-input" type="search" placeholder="Filter items">
+          </label>
+
+          <div class="sort-controls">
+            <button id="sort-category" class="toggle-button active" type="button" aria-pressed="true">Category</button>
+            <button id="sort-unchecked" class="toggle-button active" type="button" aria-pressed="true">Unchecked first</button>
+          </div>
+        </section>
+
+        <section id="list-region" class="list-region" aria-live="polite">
+          <p id="empty-state" class="empty-state">Your cart is empty. Add your first item.</p>
+          <div id="item-list" class="item-list"></div>
+        </section>
+      </main>
+
+      <footer class="bottom-toolbar">
+        <span id="item-count">0 items</span>
+        <div class="toolbar-actions">
+          <button id="copy-list" type="button">Copy list</button>
+          <button id="clear-completed" type="button">Clear completed</button>
+        </div>
+      </footer>
+    </div>
+
+    <template id="category-template">
+      <section class="category-group">
+        <h2></h2>
+        <div class="category-items"></div>
+      </section>
+    </template>
+
+    <template id="item-template">
+      <article class="grocery-item">
+        <label class="check-wrap">
+          <input class="item-check" type="checkbox">
+          <span class="custom-check" aria-hidden="true"></span>
+        </label>
+        <div class="item-copy">
+          <strong class="item-name"></strong>
+          <span class="item-quantity"></span>
+        </div>
+        <button class="icon-button edit-button" type="button" aria-label="Edit item" title="Edit">Edit</button>
+        <button class="icon-button delete-button" type="button" aria-label="Delete item" title="Delete">Del</button>
+      </article>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
