@@ -1,4 +1,4 @@
-const CACHE_NAME = "simplecart-v2";
+const CACHE_NAME = "simplecart-v21-tagline";
 const APP_SHELL = [
   "./",
   "./index.html",
