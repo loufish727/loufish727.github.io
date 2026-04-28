@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#2f7d57">
     <meta name="description" content="SimpleCart is a fast, offline-ready grocery list app.">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=21">
     <title>SimpleCart</title>
   </head>
   <body>
@@ -15,11 +15,35 @@
         <div class="brand-mark" aria-hidden="true">SC</div>
         <div>
           <h1>SimpleCart</h1>
-          <p>Fast grocery lists for the aisle.</p>
+          <p>Same list, different day.</p>
         </div>
       </header>
 
       <main>
+        <section class="panel store-panel" aria-labelledby="store-title">
+          <div class="section-heading">
+            <h2 id="store-title">Store</h2>
+            <div class="section-actions">
+              <span id="store-summary">Default list</span>
+              <button id="edit-stores" class="toggle-button" type="button" aria-pressed="false">Edit stores</button>
+            </div>
+          </div>
+          <div class="store-controls">
+            <label class="field">
+              <span>Current store</span>
+              <select id="store-select"></select>
+            </label>
+            <form id="store-form" class="store-form" autocomplete="off">
+              <label class="field">
+                <span>New store</span>
+                <input id="store-name" name="store" type="text" placeholder="e.g. Costco" maxlength="40">
+              </label>
+              <button class="secondary-button" type="submit">Add store</button>
+            </form>
+          </div>
+          <div id="store-manager" class="store-manager" hidden></div>
+        </section>
+
         <section class="panel add-panel" aria-labelledby="add-item-title">
           <h2 id="add-item-title">Add groceries</h2>
           <form id="item-form" class="item-form" autocomplete="off">
@@ -41,7 +65,12 @@
             <button class="primary-button" type="submit">Add</button>
           </form>
 
-          <div class="quick-add" aria-label="Quick add common items">
+          <div class="saved-foods-heading">
+            <span>Saved foods</span>
+            <button id="edit-saved-foods" class="toggle-button" type="button" aria-pressed="false">Edit foods</button>
+          </div>
+
+          <div id="quick-add" class="quick-add" aria-label="Quick add saved and common items">
             <button type="button" data-quick="Milk" data-category="Dairy">Milk</button>
             <button type="button" data-quick="Eggs" data-category="Dairy">Eggs</button>
             <button type="button" data-quick="Bread" data-category="Pantry">Bread</button>
@@ -75,9 +104,20 @@
         <span id="item-count">0 items</span>
         <div class="toolbar-actions">
           <button id="copy-list" type="button">Copy list</button>
-          <button id="clear-completed" type="button">Clear completed</button>
+          <button id="reset-checks" type="button">Uncheck all</button>
         </div>
       </footer>
+
+      <div id="copy-sheet" class="copy-sheet" hidden>
+        <div class="copy-card" role="dialog" aria-modal="true" aria-labelledby="copy-title">
+          <div class="copy-card-header">
+            <h2 id="copy-title">Copy list</h2>
+            <button id="close-copy-sheet" class="icon-button" type="button" aria-label="Close copy list">Close</button>
+          </div>
+          <textarea id="copy-output" readonly></textarea>
+          <button id="copy-output-button" class="primary-button" type="button">Copy text</button>
+        </div>
+      </div>
     </div>
 
     <template id="category-template">
@@ -96,12 +136,13 @@
         <div class="item-copy">
           <strong class="item-name"></strong>
           <span class="item-quantity"></span>
+          <span class="item-meta"></span>
         </div>
         <button class="icon-button edit-button" type="button" aria-label="Edit item" title="Edit">Edit</button>
         <button class="icon-button delete-button" type="button" aria-label="Delete item" title="Delete">Del</button>
       </article>
     </template>
 
-    <script src="app.js" defer></script>
+    <script src="app.js?v=21" defer></script>
   </body>
 </html>
