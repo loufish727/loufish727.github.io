@@ -1,34 +1,18 @@
-# SimpleCart
+# loufish727.github.io
 
-SimpleCart is a clean, mobile-first grocery list Progressive Web App built with plain HTML, CSS, and JavaScript. It stores data in `localStorage`, works offline after the first load, and can be installed on a phone.
+Public GitHub Pages front door for MaintainOps.
 
-## Features
+## Current Root Experience
 
-- Add, edit, delete, and check off grocery items
-- Create and manage store-specific grocery lists
-- Rename and delete stores
-- Switch between stores from the top of the app
-- See saved foods grouped under their stores in the main list
-- Collapse and expand store sections
-- Re-add an existing food to uncross it instead of making a duplicate
-- Save user-created foods as reusable quick-add buttons
-- Edit saved foods to remove chips from the quick-add picker
-- Optional quantity and category fields
-- Category grouping with default grocery categories
-- Last bought date when an item is checked off
-- Copy a text-message-friendly list with store headers and category icons
-- Checked-off items remain visible in copied text with long strike bars
-- Search/filter
-- Uncheck all completed items for the current store
-- Unchecked-first sorting
-- Offline support through a service worker
-- Installable PWA manifest
+The root site at `https://loufish727.github.io/` now points visitors toward MaintainOps:
 
-## Run Locally
+- Live app: `https://loufish727.github.io/MaintainOps/`
+- Source repo: `https://github.com/loufish727/MaintainOps`
 
-Because service workers require `http://`, run the app from a local web server instead of opening `index.html` directly.
+## Side Projects
 
-With Python:
+The previous grocery list app, SimpleCart, was moved out of the root experience and remains available at:
 
-```bash
-python -m http.server 8000
+- `https://loufish727.github.io/simplecart/`
+
+This keeps the portfolio/front-door page focused on MaintainOps while preserving the side project.
