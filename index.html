@@ -1,70 +1,80 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#1b4d3e">
-    <meta name="description" content="MaintainOps is a maintenance operations application for work orders, assets, requests, parts, preventive maintenance, team workflows, and field operations.">
-    <link rel="stylesheet" href="style.css?v=maintainops-home-1">
-    <title>MaintainOps | Maintenance Operations App</title>
-  </head>
-  <body>
-    <main class="page-shell">
-      <section class="hero" aria-labelledby="page-title">
-        <p class="eyebrow">MaintainOps</p>
-        <h1 id="page-title">Maintenance operations software for real facilities work.</h1>
-        <p class="lede">
-          A Supabase-backed web app for work orders, equipment, requests, parts inventory,
-          preventive maintenance, messaging, roles, public QR intake, and field-ready workflows.
-        </p>
-        <div class="actions" aria-label="Primary links">
-          <a class="primary-link" href="/MaintainOps/">Open MaintainOps</a>
-          <a class="secondary-link" href="https://github.com/loufish727/MaintainOps">View source</a>
-        </div>
-      </section>
-
-      <section class="status-grid" aria-label="Project highlights">
-        <article>
-          <span class="label">Current Focus</span>
-          <strong>Production hardening</strong>
-          <p>Security review, smoke-tested modularization, live verification, and deployment discipline.</p>
-        </article>
-        <article>
-          <span class="label">Core Areas</span>
-          <strong>Operations workflow</strong>
-          <p>Work orders, assets, parts, PM, procedures, requests, messages, and team role controls.</p>
-        </article>
-        <article>
-          <span class="label">Review Path</span>
-          <strong>Public repo and live app</strong>
-          <p>Reviewers can inspect the MaintainOps repository and launch the hosted app from this page.</p>
-        </article>
-      </section>
-
-      <section class="secondary-project" aria-labelledby="simplecart-title">
-        <div>
-          <p class="eyebrow">Archived side project</p>
-          <h2 id="simplecart-title">SimpleCart moved out of the front door.</h2>
-          <p>
-            The grocery list app is still available for reference, but it is no longer the root GitHub Pages experience.
-          </p>
-        </div>
-        <a class="text-link" href="/simplecart/">Open SimpleCart</a>
-      </section>
-    </main>
-
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.getRegistrations()
-          .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
-          .catch(() => {});
-      }
-
-      if ("caches" in window) {
-        caches.keys()
-          .then((keys) => Promise.all(keys.filter((key) => key.includes("simplecart")).map((key) => caches.delete(key))))
-          .catch(() => {});
-      }
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101416">
+  <meta name="description" content="MaintainOps connects maintenance requests, work orders, equipment history, preventive maintenance, parts, and the people doing the work.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MaintainOps | Keep the floor moving.">
+  <meta property="og:description" content="Maintenance work. Equipment history. One connected operation.">
+  <meta property="og:url" content="https://loufish727.github.io/">
+  <meta property="og:image" content="https://loufish727.github.io/assets/factory-hero.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://loufish727.github.io/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/barlow-condensed-bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css?v=front-door-2">
+  <link rel="stylesheet" href="assets/icon-masks.css?v=front-door-2">
+  <script src="site.js?v=front-door-2" defer></script>
+  <title>MaintainOps | Maintenance Operations</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="#" aria-label="MaintainOps home"><span class="brand-mark" aria-hidden="true">M<span>O</span></span><span>MAINTAIN<span class="brand-ops">OPS</span></span></a>
+    <nav aria-label="Main navigation"><a href="#platform">The platform</a><a href="#workflow">The workflow</a><a href="#inside">Inside the app</a></nav>
+    <a class="header-launch" href="https://loufish727.github.io/MaintainOps/">Open app <span class="icon icon-arrow" aria-hidden="true"></span></a>
+  </div></header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <picture class="hero-picture"><source media="(max-width: 600px)" srcset="assets/factory-mobile.webp"><img src="assets/factory-hero.webp" width="1942" height="809" alt="" fetchpriority="high"></picture>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <p class="eyebrow"><span class="line-marker" aria-hidden="true"></span> Built for the work behind the work</p>
+        <h1 id="hero-title">MAINTAIN<span>OPS</span><span class="title-period" aria-hidden="true">.</span></h1>
+        <p class="hero-line">Keep the floor moving.</p>
+        <p class="hero-copy">The requests. The repairs. The people.<br>Bring your maintenance operation together.</p>
+        <div class="hero-actions"><a class="button button-primary" href="https://loufish727.github.io/MaintainOps/">Open MaintainOps <span class="icon icon-arrow" aria-hidden="true"></span></a><a class="button button-glass" href="#inside">See the workspace <span class="icon icon-down" aria-hidden="true"></span></a></div>
+        <div class="hero-footnote"><span class="icon icon-work" aria-hidden="true"></span>From the first report to the final repair.</div>
+      </div>
+      <div class="hero-coordinate" aria-hidden="true"><span>MAINTENANCE / OPERATIONS</span><span>01 &mdash; CONNECTED</span></div>
+    </section>
+    <section class="platform-section" id="platform" aria-labelledby="platform-title"><div class="container">
+      <div class="section-heading"><div><p class="eyebrow section-index">01 / THE PLATFORM</p><h2 id="platform-title">One operation.<br class="mobile-break"> Every moving part.</h2></div><p>Less searching for context.<br>More time getting work done.</p></div>
+      <div class="capability-grid">
+        <article class="capability tone-work"><div class="capability-top"><span class="icon icon-work" aria-hidden="true"></span><span>01</span></div><h3>Work, organized.</h3><p>Own the next step with assigned work, priorities, due dates, and Quick Fix.</p><span class="capability-label">WORK ORDERS + PLANNING</span></article>
+        <article class="capability tone-equipment"><div class="capability-top"><span class="icon icon-equipment" aria-hidden="true"></span><span>02</span></div><h3>History that stays.</h3><p>Keep repairs, photos, files, and equipment relationships connected to the machine.</p><span class="capability-label">EQUIPMENT + HISTORY</span></article>
+        <article class="capability tone-requests"><div class="capability-top"><span class="icon icon-requests" aria-hidden="true"></span><span>03</span></div><h3>A direct way in.</h3><p>A QR code gets an issue from the floor into requests, ready to become work.</p><span class="capability-label">REQUESTS + QR INTAKE</span></article>
+        <article class="capability tone-parts"><div class="capability-top"><span class="icon icon-parts" aria-hidden="true"></span><span>04</span></div><h3>Ready for the repair.</h3><p>Connect parts and usage to the job. Keep inventory and the work in the same place.</p><span class="capability-label">PARTS + INVENTORY</span></article>
+      </div>
+    </div></section>
+    <section class="inside-section" id="inside" aria-labelledby="inside-title"><div class="container">
+      <div class="section-heading"><div><p class="eyebrow section-index">02 / INSIDE MAINTAINOPS</p><h2 id="inside-title">Your floor.<br>Your command center.</h2></div><p>A familiar instrument panel.<br>A clear view of the work behind every number.</p></div>
+      <div class="workspace-tour" data-tour>
+        <div class="tour-heading"><div class="tour-tabs" aria-label="Workspace previews" data-tour-tabs>
+          <button type="button" id="tab-work" data-tab="work"><span class="icon icon-work" aria-hidden="true"></span>My Work</button>
+          <button type="button" id="tab-equipment" data-tab="equipment"><span class="icon icon-equipment" aria-hidden="true"></span>Equipment</button>
+          <button type="button" id="tab-planning" data-tab="planning"><span class="icon icon-planning" aria-hidden="true"></span>Planning</button>
+        </div><span class="sample-label">APP PREVIEW / SAMPLE DATA</span></div>
+        <div id="panel-work" data-panel="work" class="tour-panel"><div class="tour-description"><h3>Start with what needs you.</h3><p>Your work, current status, and next action together.</p></div><a class="screenshot-link" href="assets/workspace-work.webp" target="_blank" rel="noopener" aria-label="View full-size My Work screenshot"><img src="assets/workspace-work.webp" width="1400" height="920" loading="lazy" decoding="async" alt="MaintainOps My Work preview: instrument gauges above assigned sample work orders for a hydraulic repair and routine inspection."><span class="image-expand"><span class="icon icon-expand" aria-hidden="true"></span>View full size</span></a></div>
+        <div id="panel-equipment" data-panel="equipment" class="tour-panel"><div class="tour-description"><h3>Know the machine. Keep the context.</h3><p>Equipment, condition, and linked work in one place.</p></div><a class="screenshot-link" href="assets/workspace-equipment.webp" target="_blank" rel="noopener" aria-label="View full-size Equipment screenshot"><img src="assets/workspace-equipment.webp" width="1400" height="920" loading="lazy" decoding="async" alt="MaintainOps Equipment preview with sample roll former, folder, uncoiler, mobile lift, and their operating conditions."><span class="image-expand"><span class="icon icon-expand" aria-hidden="true"></span>View full size</span></a></div>
+        <div id="panel-planning" data-panel="planning" class="tour-panel"><div class="tour-description"><h3>See what is coming. Close the loop.</h3><p>Unscheduled work, current priorities, and upcoming maintenance.</p></div><a class="screenshot-link" href="assets/workspace-planning.webp" target="_blank" rel="noopener" aria-label="View full-size Planning screenshot"><img src="assets/workspace-planning.webp" width="1400" height="920" loading="lazy" decoding="async" alt="MaintainOps Planning preview with sample work arranged into Needs action, Current schedule, and Upcoming columns."><span class="image-expand"><span class="icon icon-expand" aria-hidden="true"></span>View full size</span></a></div>
+        <div class="tour-footer"><span><span class="sample-dot" aria-hidden="true"></span>Actual app components. Illustrative records.</span><a href="https://loufish727.github.io/MaintainOps/">Open your workspace <span class="icon icon-arrow" aria-hidden="true"></span></a></div>
+      </div>
+    </div></section>
+    <section class="workflow-section" id="workflow" aria-labelledby="workflow-title"><div class="container">
+      <div class="section-heading"><div><p class="eyebrow section-index">03 / THE WORKFLOW</p><h2 id="workflow-title">Keep the work moving.<br>Keep the context.</h2></div><p>From a problem spotted on the floor<br>to a repair recorded for the next person.</p></div>
+      <ol class="workflow-steps">
+        <li class="tone-requests"><div class="step-marker"><span>01</span><span class="icon icon-requests" aria-hidden="true"></span></div><h3>Report it.</h3><p>Capture an issue with a request, a photo, or a Quick Fix.</p></li>
+        <li class="tone-work"><div class="step-marker"><span>02</span><span class="icon icon-work" aria-hidden="true"></span></div><h3>Put it to work.</h3><p>Assign the job, set its priority, and connect the right equipment.</p></li>
+        <li class="tone-parts"><div class="step-marker"><span>03</span><span class="icon icon-procedures" aria-hidden="true"></span></div><h3>Get it done.</h3><p>Keep procedures, parts, updates, and the team with the job.</p></li>
+        <li class="tone-equipment"><div class="step-marker"><span>04</span><span class="icon icon-history" aria-hidden="true"></span></div><h3>Keep the knowledge.</h3><p>Record the resolution and follow-up. The next repair starts informed.</p></li>
+      </ol>
+    </div></section>
+    <section class="connected-section" aria-labelledby="connected-title"><div class="container connected-inner"><div><p class="eyebrow">THE REST OF THE OPERATION, CONNECTED.</p><h2 id="connected-title">More than a work-order list.</h2></div><ul class="connected-list"><li><span class="icon icon-planning" aria-hidden="true"></span>Preventive maintenance</li><li><span class="icon icon-messages" aria-hidden="true"></span>Team messaging</li><li><span class="icon icon-financial" aria-hidden="true"></span>Financial asset records</li><li><span class="icon icon-equipment" aria-hidden="true"></span>Multiple facilities</li></ul></div></section>
+    <section class="closing-section" aria-labelledby="closing-title"><div class="container closing-inner"><p class="eyebrow">MADE FOR THE PEOPLE KEEPING THINGS RUNNING.</p><h2 id="closing-title">Back to the work<br>that matters.</h2><a class="button button-primary" href="https://loufish727.github.io/MaintainOps/">Open MaintainOps <span class="icon icon-arrow" aria-hidden="true"></span></a><p class="closing-note">Your equipment. Your team. Your operation.</p></div></section>
+  </main>
+  <footer><div class="container footer-inner"><a class="brand" href="#" aria-label="MaintainOps home"><span class="brand-mark" aria-hidden="true">M<span>O</span></span><span>MAINTAIN<span class="brand-ops">OPS</span></span></a><p>Maintenance operations, connected.</p><a href="https://github.com/loufish727/MaintainOps" target="_blank" rel="noopener">Explore the source <span class="icon icon-arrow" aria-hidden="true"></span></a></div></footer>
+</body>
 </html>

@@ -1,0 +1,13 @@
+{
+  "name": "maintainops-public",
+  "private": true,
+  "scripts": {
+    "test": "node scripts/verify.cjs",
+    "capture:product": "node scripts/capture-product.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.60.0",
+    "axe-core": "4.13.0",
+    "sharp": "0.35.5"
+  }
+}
