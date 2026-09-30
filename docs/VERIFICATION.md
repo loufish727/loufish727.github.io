@@ -10,7 +10,13 @@ company data, database, permissions, credentials, or storage changed.
 
 - First viewport shows the MaintainOps brand and a hint of the next section.
 - No horizontal page overflow or clipped headings, text, or controls.
+- Oxanium and Manrope load locally in both engines. The wordmark remains visible
+  at 320 and 390 pixels with both font downloads blocked, and hero text/control
+  rows do not overlap. Combined font weight is 38,880 bytes, below the 45 KB budget.
 - Hero and three app previews load; each preview is visibly sample data.
+- The abstract-metal hero replaces the literal machinery illustration. Tests
+  check the desktop/mobile image selection and the approved tagline,
+  "Keeping operations strong," including the social-sharing title.
 - Tabs work by pointer and keyboard, including arrow keys, Home and End.
 - All visible links/buttons have at least 44x44-pixel targets.
 - All internal anchors and image links resolve. App buttons target /MaintainOps/.
@@ -25,10 +31,12 @@ company data, database, permissions, credentials, or storage changed.
   app files remain untouched and accessible at their existing path.
 - Public asset budgets passed. The landing-page script is under 4 KB, with no
   runtime library or framework. Product previews range from 70 to 102 KB each.
+  Abstract hero artwork is 103 KB on desktop and 25 KB on mobile (decimal KB).
 - `npm install` reported zero dependency vulnerabilities.
 
 Local screenshots and machine-readable evidence are generated into test-results
-and excluded from source control. Production deployment has not been performed.
+and excluded from source control. Deployment status is verified separately after
+publishing; these local results alone do not establish that the site is live.
 
 The app's Strict LFES command is not copied into this independent static site.
 These are risk-scoped public-site checks, not a claim that authenticated application

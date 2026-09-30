@@ -1,18 +1,19 @@
 # Asset Provenance
 
-## Factory Artwork
+## Abstract Industrial Artwork
 
 Created with Codex's built-in image-generation tool on September 30, 2026.
-This is an illustrative production-floor scene, not a photograph of a customer
-facility. No customer photo, equipment record, or identity was sent for generation.
+This is conceptual folded-metal artwork, not a depiction of actual machinery,
+an engineering assembly, or a customer facility. No customer photo, equipment
+record, or identity was sent for generation.
 
-Project assets: `assets/factory-hero.webp` (1942 x 809, 197,262 bytes) and
-`assets/factory-mobile.webp` (1050 pixels wide, 76,902 bytes). The generated PNG
+Project assets: `assets/abstract-metal-hero.webp` (1942 x 809, 102,546 bytes) and
+`assets/abstract-metal-mobile.webp` (1050 pixels wide, 25,088 bytes). The generated PNG
 was lossily encoded to WebP with Sharp, without adding objects or changing content.
 
 Generation prompt:
 
-> Create a photorealistic editorial advertising photograph for MaintainOps, an industrial maintenance operations web app. Landscape cinematic ultra-wide composition 2.4:1. A real sheet-metal fabrication production floor, meticulously detailed roll-forming machinery, polished rollers, galvanized steel sheets, restrained safety yellow rails, charcoal control cabinets, authentic industrial steel roof structure. Camera at human eye level looking down the machine line from a 3/4 perspective. The main equipment is clearly recognizable and sharply detailed across the center and right two thirds, lit with convincing neutral-white factory daylight and subtle cool cyan instrument accents; silver metal, graphite, a little industrial amber. The left third is a quiet dark charcoal machine enclosure with relatively little detail, natural falloff leaving room for a white HTML headline to be placed over it later. Premium precision-machinery campaign photo, realistic material wear and believable engineering, not gloomy, not foggy, no neon cyberpunk, no gradients as artwork, no glowing floating elements, no people, no fake screens, no logos, absolutely NO text or lettering. The production line should feel real, not a sci-fi room. Edge to edge photograph, no frame, no UI, no typography, no split panel.
+> Generate a premium ABSTRACT brand artwork for MaintainOps, an industrial maintenance app. This is deliberately NONREPRESENTATIONAL artwork, not a factory, not a machine, not a rendering of equipment. Ultra-wide landscape 2.4:1 composition. A bold sculptural composition of broad folded brushed-aluminum bands, deep graphite planes and precise satin-metal facets sweeps diagonally through the RIGHT TWO THIRDS of the image. Visually striking overlapping angular forms, believable tactile metallic material and elegant studio reflections, rich physical depth, disciplined graphic-design composition. A few crisp cyan and ice-blue edge accents, one small restrained amber accent, subtle muted mint reflection. Predominantly neutral charcoal and silver, not dominated by blue. Crisp clear geometry, fewer large intentional forms instead of chaotic small parts. Left 40 percent is quiet nearly black graphite with fine material texture, genuinely empty of major objects, to support large HTML headline and buttons over it later. Main forms start around the middle and spread to the right edges, with enough negative space between surfaces to read the layering. Think high-end industrial product-brand campaign meets abstract folded metal sculpture, exceptionally polished, architectural and confident, NOT sci-fi machinery, no cyberpunk, no actual steel profiles, no rollers, no piping, no bolts, no cogs, no gears, no instruments, no conveyor, no control screens, no rooms, no buildings, no identifiable equipment, no literal processes, no people. No circles, orbs, bubbles, bokeh, particles, lightning or smoke. No typography, logo, text, labels, interface, card, border or watermark. Edge-to-edge raster artwork, almost photographic material rendering but unmistakably abstract art, not intended to depict an actual engineering assembly.
 
 ## Product Previews
 
@@ -34,7 +35,16 @@ Icons and favicon reuse the app's existing `iconDisplay.js` artwork. The exporte
 SVG files and `assets/icon-masks.css` are generated, not a second hand-drawn set.
 Inline SVG data URLs in CSS allow masks to render even from a local HTML file.
 
-The self-hosted Barlow Condensed Bold font is distributed under the SIL Open Font
-License in `assets/FONT-LICENSE.txt`. Downloaded from the official Google Fonts
-repository: https://github.com/google/fonts/tree/main/ofl/barlowcondensed.
-Body text uses the visitor's system font. No third-party font request is made.
+The wordmark uses self-hosted Oxanium (weights 600-700), and supporting text uses
+Manrope (weights 400-800). Latin-subset variable WOFF2 files total 38,880 bytes:
+`assets/oxanium-latin.woff2` (14,044 bytes) and `assets/manrope-latin.woff2`
+(24,836 bytes). Both are preloaded; system fonts provide a loading/failure fallback.
+No third-party font request is made by the page.
+
+Files were retrieved from the official Google Fonts CSS service on September 30,
+2026. Upstream sources and included SIL Open Font Licenses:
+
+- Oxanium: https://github.com/google/fonts/tree/main/ofl/oxanium;
+  `assets/Oxanium-LICENSE.txt`.
+- Manrope: https://github.com/google/fonts/tree/main/ofl/manrope;
+  `assets/Manrope-LICENSE.txt`.

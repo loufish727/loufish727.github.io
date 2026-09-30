@@ -8,7 +8,7 @@ const { chromium, webkit } = require('@playwright/test');
 const sharp = require('sharp');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'test-results');
-const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ttf': 'font/ttf' };
+const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.woff2': 'font/woff2' };
 const results = [];
 
 async function main() {
@@ -17,8 +17,16 @@ async function main() {
   assert(!/simplecart/i.test(index), 'No unrelated side-project references in the front door');
   assert(fs.statSync(path.join(root, 'site.js')).size < 4000, 'No heavyweight runtime');
   assert(fs.statSync(path.join(root, 'style.css')).size < 20000, 'Styles stay bounded');
-  assert(fs.statSync(path.join(root, 'assets/factory-hero.webp')).size < 240000);
-  assert(fs.statSync(path.join(root, 'assets/factory-mobile.webp')).size < 100000);
+  assert(!/factory-(hero|mobile)\.webp/.test(index), 'No obsolete factory imagery in page or sharing metadata');
+  assert(fs.statSync(path.join(root, 'assets/abstract-metal-hero.webp')).size < 240000);
+  assert(fs.statSync(path.join(root, 'assets/abstract-metal-mobile.webp')).size < 100000);
+  let fontBytes = 0;
+  for (const name of ['oxanium', 'manrope']) {
+    const font = fs.readFileSync(path.join(root, `assets/${name}-latin.woff2`));
+    assert.equal(font.subarray(0, 4).toString(), 'wOF2');
+    fontBytes += font.length;
+  }
+  assert(fontBytes < 45000, 'Self-hosted typography stays below 45 KB total');
   for (const name of ['work', 'equipment', 'planning']) {
     const image = path.join(root, `assets/workspace-${name}.webp`);
     const meta = await sharp(image).metadata();
@@ -62,7 +70,12 @@ async function main() {
           page.on('request', request => requests.push(request.url()));
           await page.goto(base, { waitUntil: 'networkidle' });
           await page.evaluate(() => document.fonts.ready);
+          assert(await page.evaluate(() => ['Oxanium', 'Manrope'].every(family =>
+            [...document.fonts].some(face => face.family.replaceAll('"', '') === family && face.status === 'loaded'))), 'Both local fonts loaded');
           assert.equal(await page.locator('h1').count(), 1);
+          assert.equal(await page.locator('h1').textContent(), 'MAINTAINOPS');
+          assert.equal(await page.locator('.hero-line').textContent(), 'Keeping operations strong');
+          assert.equal(await page.locator('meta[property="og:title"]').getAttribute('content'), 'MaintainOps | Keeping operations strong');
           assert.equal(await page.locator('[role=tab][aria-selected=true]').count(), 1);
           assert(await page.locator('#panel-work').isVisible());
           const overflow = await page.evaluate(() => [...document.querySelectorAll('h1,h2,h3,p,a,button')].filter(node => {
@@ -70,9 +83,15 @@ async function main() {
           }).map(node => ({ tag: node.tagName, text: node.textContent.slice(0, 50) })));
           assert.deepEqual(overflow, [], `${engine} ${width} text/control overflow`);
           assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${width} page overflow`);
+          const heroRows = await page.locator('.hero-content > *').evaluateAll(nodes => nodes
+            .map(node => node.getBoundingClientRect()).filter(rect => rect.height > 0)
+            .map(rect => ({ top: rect.top, bottom: rect.bottom })));
+          assert(heroRows.every((row, i) => !i || row.top >= heroRows[i - 1].bottom - 1), 'Hero lettering and controls do not overlap');
           const nextTop = await page.locator('#platform .section-index').evaluate(node => node.getBoundingClientRect().top);
           assert(nextTop < height - 6, `${engine} ${width} hero must reveal next section: ${nextTop}`);
           assert(await page.locator('.hero-picture img').evaluate(node => node.complete && node.naturalWidth > 0));
+          assert.equal(await page.locator('.hero-picture img').evaluate(node => new URL(node.currentSrc).pathname.split('/').pop()),
+            width <= 600 ? 'abstract-metal-mobile.webp' : 'abstract-metal-hero.webp');
           if (width === 390 || width === 1440) await page.screenshot({ path: path.join(output, `${engine}-${width}-hero.png`), animations: 'disabled' });
           for (const id of ['equipment', 'planning', 'work']) {
             await page.locator(`#tab-${id}`).click();
@@ -122,6 +141,19 @@ async function main() {
         assert(await local.locator('#panel-equipment').isVisible());
         await local.close();
         results.push(`${engine}: no-JS fallback and local-file preview PASS`);
+        for (const width of [320, 390]) {
+          const fallback = await browser.newPage({ viewport: { width, height: 844 } });
+          await fallback.route('**/*.woff2', route => route.abort());
+          await fallback.goto(base, { waitUntil: 'networkidle' });
+          await fallback.evaluate(() => document.fonts.ready);
+          assert(await fallback.evaluate(() => {
+            const title = document.querySelector('h1');
+            const rect = title.getBoundingClientRect();
+            return rect.left >= 0 && rect.right <= innerWidth && title.scrollWidth <= title.clientWidth + 1;
+          }), `${engine} ${width} fallback wordmark stays visible`);
+          await fallback.close();
+        }
+        results.push(`${engine}: local-font failure fallback PASS`);
       } finally { await browser.close(); }
     }
     const browser = await chromium.launch({ channel: process.env.MAINTAINOPS_CHROMIUM_CHANNEL || 'msedge' });
