@@ -1,0 +1,18 @@
+.support-page .header-launch { margin-inline-start: auto; }
+.support-page .brand { gap: .35em; }
+.support-main { max-width: 48rem; padding-block: 3rem 4rem; }
+.support-main h1 { font-size: 2.75rem; white-space: normal; line-height: 1.15; }
+.support-main section { padding-block: 1.5rem; border-bottom: 1px solid var(--line); }
+.support-main section:first-of-type { margin-top: 1.5rem; border-top: 2px solid var(--equipment); }
+.support-main h2 { font-size: 1.375rem; margin-bottom: .5rem; }
+.support-main p { max-width: 66ch; color: var(--muted); line-height: 1.65; }
+.support-main p + p { margin-top: .65rem; }
+.support-main strong { color: #f5f7f8; }
+.support-main a { display: inline-flex; align-items: center; min-height: 48px; color: var(--equipment); font-weight: 700; }
+.support-main .support-email { margin-top: .4rem; font-size: 1.125rem; overflow-wrap: anywhere; }
+.support-main .support-note { font-size: .875rem; }
+.support-links { display: flex; flex-wrap: wrap; gap: 0 1.5rem; margin-top: .4rem; }
+@media (max-width: 600px) {
+  .support-main { padding-block: 2rem; }
+  .support-main h1 { font-size: 2rem; }
+}

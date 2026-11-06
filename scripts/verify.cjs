@@ -48,8 +48,8 @@ async function main() {
   const server = http.createServer((req, res) => {
     try {
       const url = new URL(req.url, 'http://localhost');
-      const relative = decodeURIComponent(url.pathname).replace(/^\/+/, '') || 'index.html';
-      if (!/^(?:index\.html|style\.css|site\.js|service-worker\.js|assets\/[a-zA-Z0-9_./-]+)$/.test(relative)) throw Error('Not served');
+      const relative = decodeURIComponent(url.pathname).replace(/^\/+/, '') + (url.pathname.endsWith('/') ? 'index.html' : '');
+      if (!/^(?:index\.html|support\/(?:index\.html|support\.css)|style\.css|site\.js|service-worker\.js|assets\/[a-zA-Z0-9_./-]+)$/.test(relative)) throw Error('Not served');
       const file = path.resolve(root, relative);
       if (!file.startsWith(root + path.sep)) throw Error('Outside public root');
       res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'text/plain', 'Cache-Control': 'no-store' });
@@ -123,6 +123,26 @@ async function main() {
             assert.deepEqual(audit.violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) })), [], `Accessibility ${engine} ${width}`);
             await page.screenshot({ path: path.join(output, `${engine}-${width}-full.png`), fullPage: true, animations: 'disabled' });
           }
+          await page.getByRole('navigation').getByRole('link', { name: 'Help', exact: true }).click();
+          assert.equal(await page.title(), 'Help & support | Maintenance by LFES');
+          assert.equal(await page.locator('h1').innerText(), 'Help & support');
+          assert.equal(await page.getByRole('link', { name: 'Open app' }).getAttribute('href'), 'https://loufish727.github.io/MaintainOps/');
+          const mail = await page.locator('a[href^="mailto:"]').evaluateAll(nodes => nodes.map(n => {
+            const url = new URL(n.href);
+            return [url.pathname, url.searchParams.get('subject')];
+          }));
+          assert.deepEqual(mail, ['Sign-in help', 'Privacy question', 'Account deletion request'].map(s => ['maintenance@lfes.app', s]));
+          assert.equal(await page.locator('form,script').count(), 0, 'Support is public and works without JS');
+          assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'No support page overflow');
+          assert(await page.locator('a:not(.skip-link)').evaluateAll(nodes => nodes.every(n => n.getBoundingClientRect().height >= 44)), 'Support tap targets');
+          if (width === 390 || width === 1440) {
+            await page.screenshot({ path: path.join(output, `${engine}-${width}-support.png`), fullPage: true });
+            await page.addScriptTag({ path: require.resolve('axe-core/axe.min.js') });
+            const supportAudit = await page.evaluate(() => axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'] } }));
+            assert.deepEqual(supportAudit.violations.map(v => [v.id, v.nodes.map(n => n.target)]), [], 'Support accessibility');
+          }
+          await page.getByRole('link', { name: 'Maintenance by LFES' }).click();
+          assert.equal(await page.locator('h1').textContent(), 'MAINTAINOPS');
           assert.deepEqual(errors, []); assert.deepEqual(badResponses, []);
           assert(requests.every(url => url.startsWith(base)), 'No third-party tracking, auth, font or database calls');
           results.push(`${engine} ${width}x${height}: layout, assets, tour, keyboard, links, targets, no external calls PASS`);
@@ -133,6 +153,9 @@ async function main() {
         await nojs.goto(base);
         assert.equal(await nojs.locator('.tour-panel:visible').count(), 3);
         assert.equal(await nojs.locator('.tour-tabs:visible').count(), 0);
+        await nojs.getByRole('link', { name: 'Help & support', exact: true }).click();
+        assert(await nojs.getByRole('link', { name: 'Request account deletion' }).isVisible());
+        assert.equal((await nojs.goto(base + 'support/')).status(), 200);
         await nojs.close();
         const local = await browser.newPage();
         await local.goto(pathToFileURL(path.join(root, 'index.html')).href);

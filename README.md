@@ -3,6 +3,10 @@
 Static public introduction at https://loufish727.github.io/.
 The operational app remains a separate project at /MaintainOps/.
 
+The public support page for Maintenance by LFES is at /support/. It provides
+sign-in help, issue-report guidance, and email contact for privacy and account
+deletion requests. It requires no account and submits no form to the app.
+
 ## Local Review
 
 Open index.html in a browser. The site has no build step, backend, login, analytics,
